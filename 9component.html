@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+      .fruit_style {
+        border: 1px solid #ccc;
+        background-color: white;
+        padding-left: 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main">
+      <favorite-fruits></favorite-fruits>
+      <h1>{{ sTitle }}</h1>
+      <favorite-fruits></favorite-fruits>
+    </div>
+
+    <script>
+      // 전역컴포넌트
+      // - 어플리케이션 전체에서 사용 가능
+      // - 모든 Vue 인스턴스 및 컴포넌트에서 접근 가능
+      // - 전역으로 등록하기 때문에, 어플리케이션이 커질수록 명시적인 컴포넌트 명칭이 중요
+      Vue.component("favorite-fruits", {
+        data: function () {
+          return {
+            aFruits: [
+              { name: "사과", price: 100 },
+              { name: "오렌지", price: 200 },
+              { name: "수박", price: 300 },
+            ],
+          };
+        },
+        template: `
+        <div>
+          <div v-for="value in aFruits">
+            <p>좋아하는 과일: {{ value.name }}({{value.price}}원)</p>
+          </div>
+        </div>
+        `,
+      });
+
+      new Vue({
+        el: "#main",
+        data: {
+          sTitle: "안녕하세요.",
+        },
+      });
+    </script>
+  </body>
+</html>
